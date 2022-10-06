@@ -5,11 +5,14 @@ require 'pry'
 
 puts "🌱 Seeding DB ..."
 
+categories=["restaurants", "shopping", "nightlife", "active", "beautysvc", "auto", "homeservices"]
 url = "https://api.yelp.com/v3/businesses/search?location=denver&limit=50"
 businesses = []
 
-5.times.with_index do |i|
-  response = RestClient.get(url + "&offset=#{i * 50}", headers = { Authorization: ENV['API_KEY'] })
+# "&offset=#{i * 50}"
+
+7.times.with_index do |i|
+  response = RestClient.get(url + "&categories=#{categories[i-1]}", headers = { Authorization: ENV['API_KEY'] })
   businesses.concat JSON.parse(response)["businesses"]
 end
 
