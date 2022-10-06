@@ -9,26 +9,140 @@ categories=["restaurants", "shopping", "nightlife", "active", "beautysvc", "auto
 url = "https://api.yelp.com/v3/businesses/search?location=denver&limit=50"
 businesses = []
 
-# "&offset=#{i * 50}"
-
-7.times.with_index do |i|
-  response = RestClient.get(url + "&categories=#{categories[i-1]}", headers = { Authorization: ENV['API_KEY'] })
-  businesses.concat JSON.parse(response)["businesses"]
-end
-
 Faker::Config.locale = 'en-US'
-businesses.each do |business|
+
+response = RestClient.get(url + "&categories=restaurants", headers = { Authorization: ENV['API_KEY'] })
+restaurants = JSON.parse(response)["businesses"]
+restaurants.each do |restaurant|
   Business.create(
-    name: business["name"],
-    business_type: business["categories"][0]["title"],
-    address: business["location"]["display_address"].join(', '),
-    price: business["price"],
-    image_url: business["image_url"],
+    name: restaurant["name"],
+    business_type: "restaurants",
+    address: restaurant["location"]["display_address"].join(', '),
+    price: restaurant["price"],
+    image_url: restaurant["image_url"],
     phone_number: "(#{Faker::PhoneNumber.area_code}) #{Faker::PhoneNumber.exchange_code}-#{Faker::PhoneNumber.subscriber_number(length: 4)}",
     website: Faker::Internet.url, 
-    transactions: business["transactions"]
+    transactions: restaurant["transactions"]
   )
 end
+
+response = RestClient.get(url + "&categories=shopping", headers = { Authorization: ENV['API_KEY'] })
+shopping = JSON.parse(response)["businesses"]
+shopping.each do |shop|
+  Business.create(
+    name: shop["name"],
+    business_type: "shopping",
+    address: shop["location"]["display_address"].join(', '),
+    price: shop["price"],
+    image_url: shop["image_url"],
+    phone_number: "(#{Faker::PhoneNumber.area_code}) #{Faker::PhoneNumber.exchange_code}-#{Faker::PhoneNumber.subscriber_number(length: 4)}",
+    website: Faker::Internet.url, 
+    transactions: shop["transactions"]
+  )
+end
+
+response = RestClient.get(url + "&categories=nightlife", headers = { Authorization: ENV['API_KEY'] })
+nightlife = JSON.parse(response)["businesses"]
+nightlife.each do |life|
+  Business.create(
+    name: life["name"],
+    business_type: "nightlife",
+    address: life["location"]["display_address"].join(', '),
+    price: life["price"],
+    image_url: life["image_url"],
+    phone_number: "(#{Faker::PhoneNumber.area_code}) #{Faker::PhoneNumber.exchange_code}-#{Faker::PhoneNumber.subscriber_number(length: 4)}",
+    website: Faker::Internet.url, 
+    transactions: life["transactions"]
+  )
+end
+
+response = RestClient.get(url + "&categories=active", headers = { Authorization: ENV['API_KEY'] })
+active = JSON.parse(response)["businesses"]
+active.each do |act|
+  Business.create(
+    name: act["name"],
+    business_type: "active",
+    address: act["location"]["display_address"].join(', '),
+    price: act["price"],
+    image_url: act["image_url"],
+    phone_number: "(#{Faker::PhoneNumber.area_code}) #{Faker::PhoneNumber.exchange_code}-#{Faker::PhoneNumber.subscriber_number(length: 4)}",
+    website: Faker::Internet.url, 
+    transactions: act["transactions"]
+  )
+end
+
+response = RestClient.get(url + "&categories=beautysvc", headers = { Authorization: ENV['API_KEY'] })
+beautysvc = JSON.parse(response)["businesses"]
+beautysvc.each do |beauty|
+  Business.create(
+    name: beauty["name"],
+    business_type: "active",
+    address: beauty["location"]["display_address"].join(', '),
+    price: beauty["price"],
+    image_url: beauty["image_url"],
+    phone_number: "(#{Faker::PhoneNumber.area_code}) #{Faker::PhoneNumber.exchange_code}-#{Faker::PhoneNumber.subscriber_number(length: 4)}",
+    website: Faker::Internet.url, 
+    transactions: beauty["transactions"]
+  )
+end
+
+response = RestClient.get(url + "&categories=beautysvc", headers = { Authorization: ENV['API_KEY'] })
+beautysvc = JSON.parse(response)["businesses"]
+beautysvc.each do |beauty|
+  Business.create(
+    name: beauty["name"],
+    business_type: "beautysvc",
+    address: beauty["location"]["display_address"].join(', '),
+    price: beauty["price"],
+    image_url: beauty["image_url"],
+    phone_number: "(#{Faker::PhoneNumber.area_code}) #{Faker::PhoneNumber.exchange_code}-#{Faker::PhoneNumber.subscriber_number(length: 4)}",
+    website: Faker::Internet.url, 
+    transactions: beauty["transactions"]
+  )
+end
+
+response = RestClient.get(url + "&categories=auto", headers = { Authorization: ENV['API_KEY'] })
+auto = JSON.parse(response)["businesses"]
+auto.each do |aut|
+  Business.create(
+    name: aut["name"],
+    business_type: "auto",
+    address: aut["location"]["display_address"].join(', '),
+    price: aut["price"],
+    image_url: aut["image_url"],
+    phone_number: "(#{Faker::PhoneNumber.area_code}) #{Faker::PhoneNumber.exchange_code}-#{Faker::PhoneNumber.subscriber_number(length: 4)}",
+    website: Faker::Internet.url, 
+    transactions: aut["transactions"]
+  )
+end
+
+response = RestClient.get(url + "&categories=homeservices", headers = { Authorization: ENV['API_KEY'] })
+homeservices = JSON.parse(response)["businesses"]
+homeservices.each do |home|
+  Business.create(
+    name: home["name"],
+    business_type: "home",
+    address: home["location"]["display_address"].join(', '),
+    price: home["price"],
+    image_url: home["image_url"],
+    phone_number: "(#{Faker::PhoneNumber.area_code}) #{Faker::PhoneNumber.exchange_code}-#{Faker::PhoneNumber.subscriber_number(length: 4)}",
+    website: Faker::Internet.url, 
+    transactions: home["transactions"]
+  )
+end
+
+# businesses.each do |business|
+#   Business.create(
+#     name: business["name"],
+#     business_type: business["categories"][0]["title"],
+#     address: business["location"]["display_address"].join(', '),
+#     price: business["price"],
+#     image_url: business["image_url"],
+#     phone_number: "(#{Faker::PhoneNumber.area_code}) #{Faker::PhoneNumber.exchange_code}-#{Faker::PhoneNumber.subscriber_number(length: 4)}",
+#     website: Faker::Internet.url, 
+#     transactions: business["transactions"]
+#   )
+# end
 
 20.times do
   User.create(
