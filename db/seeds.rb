@@ -16,7 +16,8 @@ restaurants = JSON.parse(response)["businesses"]
 restaurants.each do |restaurant|
   Business.create(
     name: restaurant["name"],
-    business_type: "restaurants",
+    category: "restaurants",
+    business_type: restaurant["categories"][0]["title"],
     address: restaurant["location"]["display_address"].join(', '),
     price: restaurant["price"],
     image_url: restaurant["image_url"],
@@ -31,7 +32,8 @@ shopping = JSON.parse(response)["businesses"]
 shopping.each do |shop|
   Business.create(
     name: shop["name"],
-    business_type: "shopping",
+    category: "shopping",
+    business_type: shop["categories"][0]["title"],
     address: shop["location"]["display_address"].join(', '),
     price: shop["price"],
     image_url: shop["image_url"],
@@ -46,7 +48,8 @@ nightlife = JSON.parse(response)["businesses"]
 nightlife.each do |life|
   Business.create(
     name: life["name"],
-    business_type: "nightlife",
+    category: "nightlife", 
+    business_type: life["categories"][0]["title"],
     address: life["location"]["display_address"].join(', '),
     price: life["price"],
     image_url: life["image_url"],
@@ -61,7 +64,8 @@ active = JSON.parse(response)["businesses"]
 active.each do |act|
   Business.create(
     name: act["name"],
-    business_type: "active",
+    category: "active",
+    business_type: act["categories"][0]["title"],
     address: act["location"]["display_address"].join(', '),
     price: act["price"],
     image_url: act["image_url"],
@@ -76,22 +80,8 @@ beautysvc = JSON.parse(response)["businesses"]
 beautysvc.each do |beauty|
   Business.create(
     name: beauty["name"],
-    business_type: "active",
-    address: beauty["location"]["display_address"].join(', '),
-    price: beauty["price"],
-    image_url: beauty["image_url"],
-    phone_number: "(#{Faker::PhoneNumber.area_code}) #{Faker::PhoneNumber.exchange_code}-#{Faker::PhoneNumber.subscriber_number(length: 4)}",
-    website: Faker::Internet.url, 
-    transactions: beauty["transactions"]
-  )
-end
-
-response = RestClient.get(url + "&categories=beautysvc", headers = { Authorization: ENV['API_KEY'] })
-beautysvc = JSON.parse(response)["businesses"]
-beautysvc.each do |beauty|
-  Business.create(
-    name: beauty["name"],
-    business_type: "beautysvc",
+    category: "beautysvc", 
+    business_type: beauty["categories"][0]["title"],
     address: beauty["location"]["display_address"].join(', '),
     price: beauty["price"],
     image_url: beauty["image_url"],
@@ -106,7 +96,8 @@ auto = JSON.parse(response)["businesses"]
 auto.each do |aut|
   Business.create(
     name: aut["name"],
-    business_type: "auto",
+    category: "auto",
+    business_type: aut["categories"][0]["title"], 
     address: aut["location"]["display_address"].join(', '),
     price: aut["price"],
     image_url: aut["image_url"],
@@ -121,6 +112,7 @@ homeservices = JSON.parse(response)["businesses"]
 homeservices.each do |home|
   Business.create(
     name: home["name"],
+    category: "home",
     business_type: "home",
     address: home["location"]["display_address"].join(', '),
     price: home["price"],
