@@ -63,7 +63,8 @@ class ApplicationController < Sinatra::Base
   get '/businesses/search/:term' do
     biz = Business.all.filter do |business|
       business.name.downcase.include?(params[:term].downcase) ||
-      business.business_type.downcase.include?(params[:term].downcase)
+      business.business_type.downcase.include?(params[:term].downcase) || 
+      business.category.downcase.include?(params[:term].downcase)
     end
     biz.to_json(include: :reviews)
   end
