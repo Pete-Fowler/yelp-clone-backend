@@ -1,124 +1,27 @@
-# Phase 3 Project Guidelines
+## Yelp Clone
+<a href=''>Live Page</a>
 
-## Learning Goals
+This Yelp clone was built in a group project for the Flatiron School curriculum. It uses Ruby, ActiveRecord, and Sinatra for the backend, and React for the frontend. Our goal was to build as much functionality from the Yelp website as we could in only about 4 days. One of my contributions was a StarRating component to display an average star rating, which is better than Yelp's version, because it fills a partially full star in tenths rather than Yelp's version which only renders them full, half-full, or empty and is less accurate visually.
 
-- Build a web basic API with Sinatra and Active Record to support a React
-  frontend
+### Backend
+I was responsible for writing over half the backend, including the routes to search our database for businesses by name, parent category, subcategory, all businesses, and for details of one business. I did most of the work to seed our database with information from the Yelp API, as well as other sources for images and the Faker gem for dummy content.
 
-## Introduction
+One challenge here was that the Yelp API did not give as much information as needed without doing an additional fetch for each business. Some dummy content such as fake reviews was used as doing several hundred fetches or more in one go to seed the database did not seem feasible during development of a free student project.
 
-Congrats on getting through all the material for Phase 3! Now's the time to put
-it all together and build something from scratch to reinforce what you know and
-expand your horizons.
+Another challenge was that for Restaurants, the main fetch data would only return a restaurant as a member of hundreds of restaurant subcategories, and it did not include the parent category of restaurant. Searching by this category did not work until I implemented a solution by creating several different fetches and loops to create business records and manually add the parent category into our database.
 
-The focus of this project is **building a Sinatra API backend** that uses
-**Active Record** to access and persist data in a database, which will be used
-by a separate **React frontend** that interacts with the database via the API.
+### Frontend
+I got our group to use React CSS modules to better organize and compartmentalize our CSS. I wrote the following components:
+- BusinessResult
+- SearchBar
+- StarRating
+- StarRatingPicker
 
-## Requirements
+I also contributed to all or nearly all of the other components and component styles, and other group members added some contributions to my components as well.
 
-For this project, you must:
+The BusinessResult component lists details about each business in card format, and navigates the user to a BusinessDetails component on click. 
 
-- Use Active Record to interact with a database.
-- Have at least two models with a one-to-many relationship.
-- At a minimum, set up the following API routes in Sinatra:
-  - create and read actions for both models
-  - full CRUD capability for one of the models
-- Build a separate React frontend application that interacts with the API to
-  perform CRUD actions.
-- Use good OO design patterns. You should have separate classes for each of your
-  models, and create instance and class methods as necessary.
+The SearchBar includes a controlled input and uses react-router-dom to navigate the user to another component that fetches to search the database using the search term from the input received from a url parameter. I added conditional rendering in the header to display the header differently depending on which page the user is on.
 
-For example, build a todo list application with a React frontend interface and a
-Sinatra backend API, where a user can:
+The StarRating and StarRatingPicker components were the most interesting to build. I matched Yelp's style of displaying an average star rating with full stars, partially colored stars, and empty gray stars. For adding a review, I added Yelp's hover effects that highlight the stars appropriate and change the color of all the stars for each step. This was done by converting the star rating to an array of 1s, fractions, and 0s, and then mapping that to divs, using a linear gradient that would render the background completely full or empty or partially full for each star appropriately. This is arguably better than the Yelp website's version, which uses rounding and only displays stars fully, empty, or half-full.
 
-- **Create** a new todo
-- **Read** a list of all todos
-- **Update** an individual todo
-- **Delete** a todo
-
-A `Todo` can be tagged with a `Category`, so that each todo _belongs to_ a
-category and each category _has many_ todos.
-
-## Getting Started
-
-### Backend Setup
-
-This repository has all the starter code needed to get a Sinatra backend up and
-running. [**Fork and clone**][fork link] this repository to get started. Then, run
-`bundle install` to install the gems.
-
-**Important**: Be sure you fork a copy of the repo into your GitHub account
-before cloning it. You can do this by using the link above or by clicking the
-"Octocat" button at the top of this page, then clicking "Fork" in the upper
-right corner of the repo page.
-
-[fork link]: https://github.com/learn-co-curriculum/phase-3-sinatra-react-project/fork
-
-The `app/controllers/application_controller.rb` file has an example GET route
-handler. Replace this route with routes for your project.
-
-You can start your server with:
-
-```console
-$ bundle exec rake server
-```
-
-This will run your server on port
-[http://localhost:9292](http://localhost:9292).
-
-### Frontend Setup
-
-Your backend and your frontend should be in **two different repositories**.
-
-Create a new repository in a **separate folder** with a React app for your
-frontend. To do this, `cd` out of the backend project directory, and use
-[create-react-app][] to generate the necessary code for your React frontend:
-
-```console
-$ npx create-react-app my-app-frontend
-```
-
-After creating the project locally, you should also
-[create a repository on GitHub][create repo] to host your repo and help
-collaborate, if you're working with a partner.
-
-### Fetch Example
-
-Your React app should make fetch requests to your Sinatra backend! Here's an
-example:
-
-```js
-fetch("http://localhost:9292/test")
-  .then((r) => r.json())
-  .then((data) => console.log(data));
-```
-
-## Project Tips
-
-- This project is intended to focus more on the backend than the frontend, so
-  try and keep the React side of things relatively simple. Focus on working with
-  Active Record and performing CRUD actions. What are some interesting queries you can write? What kinds of questions can you ask of your data?
-- Once you have a project idea, come up with a domain model and decide what
-  relationships exist between the models in your application. Use a tool like
-  [dbdiagram.io][] to help visualize your models.
-- Decide on your API endpoints. What data should they return? What kind of CRUD
-  action should they perform? What data do they need from the client?
-- Use [Postman][postman download] to test your endpoints.
-- Use `binding.pry` to debug your requests on the server. It's very helpful to use a
-  `binding.pry` in your controller within a route to see what `params` are being
-  sent.
-- Use the [Network Tab in the Dev Tools][network tab] in the frontend to debug
-  your requests.
-
-## Resources
-
-- [create-react-app][]
-- [dbdiagram.io][]
-- [Postman][postman download]
-
-[create-react-app]: https://create-react-app.dev/docs/getting-started
-[create repo]: https://docs.github.com/en/get-started/quickstart/create-a-repo
-[dbdiagram.io]: https://dbdiagram.io/
-[postman download]: https://www.postman.com/downloads/
-[network tab]: https://developer.chrome.com/docs/devtools/network/
