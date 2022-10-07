@@ -33,11 +33,11 @@ class ApplicationController < Sinatra::Base
 
   delete '/review/:id' do
     delete_review = Review.find(params[:id])
-    
+
         delete_review.destroy
         delete_review.to_json
-      
-  
+
+
   end
 
   get '/businesses' do
@@ -51,22 +51,14 @@ class ApplicationController < Sinatra::Base
       } } })
   end
 
-  post '/businesses' do
-    biz = Business.create(
-      name: params[:name],
-      business_type: params[:business_type],
-      address: params[:address]
-    )
-    biz.to_json
-  end
-
   get '/businesses/search/:term' do
+    return Business.all.to_json(include: :reviews) if params[:term].downcase == 'all'
+
     biz = Business.all.filter do |business|
       business.name.downcase.include?(params[:term].downcase) ||
-      business.business_type.downcase.include?(params[:term].downcase) || 
+      business.business_type.downcase.include?(params[:term].downcase) ||
       business.category.downcase.include?(params[:term].downcase)
     end
     biz.to_json(include: :reviews)
   end
-
 end
