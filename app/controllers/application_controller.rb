@@ -1,9 +1,7 @@
+
+
 class ApplicationController < Sinatra::Base
   set :default_content_type, 'application/json'
-
-  get "/" do
-    { message: "Good luck with your project!" }.to_json
-  end
 
   post '/review/' do
     if User.find(params[:user_id]).session_cookie == params[:session_cookie]
@@ -40,9 +38,9 @@ class ApplicationController < Sinatra::Base
 
   end
 
-  get '/businesses' do
-    Business.all.to_json
-  end
+  # get '/businesses' do
+  #   Business.all.to_json
+  # end
 
   get '/business/:id' do
     Business.find(params[:id]).to_json(only: [:name, :address, :business_type, :id, :price, :image_url, :phone_number, :website, :transactions], include:
@@ -51,10 +49,10 @@ class ApplicationController < Sinatra::Base
       } } })
   end
 
-  get '/businesses/search/:term' do
-    return Business.all.to_json(include: :reviews) if params[:term].downcase == 'all'
+  get '/businesses/search/:term/page/:page' do
+    return Business.page(params[:page]).all.to_json(include: :reviews) if params[:term].downcase == 'all'
 
-    biz = Business.all.filter do |business|
+    biz = Business.page(params[:page]).all.filter do |business|
       business.name.downcase.include?(params[:term].downcase) ||
       business.business_type.downcase.include?(params[:term].downcase) ||
       business.category.downcase.include?(params[:term].downcase)
