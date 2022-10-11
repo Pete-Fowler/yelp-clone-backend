@@ -49,6 +49,7 @@ end
 
 # These gems will only be used when we are running tests
 group :test do
+  gem "sqlite3", "~> 1.4"
   gem "database_cleaner", "~> 2.0"
   gem "rack-test", "~> 1.1"
   gem "rspec", "~> 3.10"
