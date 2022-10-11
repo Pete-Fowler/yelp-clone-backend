@@ -13,5 +13,6 @@ test:
 
 production:
   adapter: postgresql
-  database: catan
-  pool: 5
+  encoding: unicode
+  database: production
+
