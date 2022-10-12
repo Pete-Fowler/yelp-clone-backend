@@ -1,7 +1,6 @@
 require 'rest-client'
 require 'dotenv'
 require 'faker'
-require 'pry'
 
 puts "🌱 Seeding DB ..."
 
