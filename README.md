@@ -1,6 +1,8 @@
 ## Yelp Clone
 <a href='https://yelpclone.petefowler.dev'>Live Page</a>
 
+<a href='https://github.com/Pete-Fowler/yelp-clone-frontend'>Front end reposotiry</a>
+
 This Yelp clone was built in a group project for the Flatiron School curriculum. It uses Ruby, Active Record, and Sinatra for the back end, and React for the front end. Our goal was to build as much functionality from the Yelp website as we could in only about 4 days. One of my contributions was a StarRating component to display an average star rating, which is more accurate than Yelp's version, because it fills a partially full star in tenths rather than Yelp's version which only renders them full, half-full, or empty.
 
 ### Backend
