@@ -1,5 +1,5 @@
 ## Yelp Clone
-<a href='https://yelpclone.petefowler.dev'>Live Page</a>
+<a href='https://yelpclone.petefowler.dev'>Live page</a>
 
 <a href='https://github.com/Pete-Fowler/yelp-clone-frontend'>Front end reposotiry</a>
 
