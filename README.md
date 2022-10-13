@@ -30,7 +30,7 @@ The StarRating and StarRatingPicker components were the most interesting to buil
 This was done by converting the star rating to an array of 1s, fractions, and 0s, and then mapping that to divs, using a linear gradient that would render the background completely full or empty or partially full for each star appropriately. This is arguably better than the Yelp website's version, which uses rounding and only displays stars fully, empty, or half-full.
 
 ### Improvements
-I would improve many things about this project. The seed data is limited and could potentially be expanded. There are many features of the Yelp site that were not implemented due to lack of time, including additional dropdown menus, filters for sorting, and maps. 
+I would improve many things about this project. The seed data is limited and could potentially be expanded. It has just 350 records, all of them in the Denver area. We did not add additional fetch requests to the Yelp API after seeding the database, as the focus of the project was to work within our own backend databases as much as possible. There are many features of the Yelp site that were not implemented due to lack of time, including additional dropdown menus, filters for sorting, and maps. 
 
 Within the scope of our project, I could see the value of following a style guide. Our group had different styles and experience levels and approaches, and people lacking professional experience and a style guide led to code that often could have been cleaner and following the same format to make it more readable. 
 
