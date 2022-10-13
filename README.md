@@ -27,3 +27,10 @@ The StarRating and StarRatingPicker components were the most interesting to buil
 
 This was done by converting the star rating to an array of 1s, fractions, and 0s, and then mapping that to divs, using a linear gradient that would render the background completely full or empty or partially full for each star appropriately. This is arguably better than the Yelp website's version, which uses rounding and only displays stars fully, empty, or half-full.
 
+### Improvements
+I would improve many things about this project. The seed data is limited and could potentially be expanded. There are many features of the Yelp site that were not implemented due to lack of time, including additional dropdown menus, filters for sorting, and maps. 
+
+Within the scope of our project, I could see the value of following a style guide. Our group had different styles and experience levels and approaches, and people lacking professional experience and a style guide led to code that often could have been cleaner and following the same format to make it more readable. 
+
+I noticed this particularly with the CSS, as one group member began creating global rules to denote flexbox rows and columns and other things before I was able to get the group to use CSS modules. It seemed like this caused some of the styling and conditional rendering code to feel somewhat ugly and hacky. I ran into this in particular with the conditional rendering of the header to display differently depending on the route. This probably would have gone better if everyone was using CSS modules from the beginning or agreed on a convention such as block, element, modifier.
+
