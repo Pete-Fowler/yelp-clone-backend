@@ -14,7 +14,7 @@ gem "rack-contrib", "~> 2.3"
 
 # More Rack middleware! Used to handle CORS requests
 # https://github.com/cyu/rack-cors
-gem "rack-cors"
+gem "rack-cors", "~> 1.1"
 
 # An object-relational mapper
 # https://guides.rubyonrails.org/active_record_basics.html
@@ -57,5 +57,6 @@ group :test do
 end
 
 group :production do
+  gem "psych", "< 4"
   gem "pg"
 end
