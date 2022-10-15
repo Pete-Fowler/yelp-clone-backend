@@ -1,10 +1,6 @@
 class ApplicationController < Sinatra::Base
   set :default_content_type, 'application/json'
 
-  get "/" do
-    { message: "Good luck with your project!" }.to_json
-  end
-
   post '/review/' do
     if User.find(params[:user_id]).session_cookie == params[:session_cookie]
       new_review = Review.create(
@@ -16,7 +12,6 @@ class ApplicationController < Sinatra::Base
       new_review.to_json
     end
   end
-
 
   patch '/review/:id' do
     patch_review = Review.find(params[:id])

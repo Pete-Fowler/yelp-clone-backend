@@ -57,6 +57,5 @@ group :test do
 end
 
 group :production do
-  gem 'psych', '< 4'
   gem "pg"
 end
