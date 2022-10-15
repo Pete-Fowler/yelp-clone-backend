@@ -119,7 +119,7 @@ DEPENDENCIES
   pg
   pry (~> 0.14.1)
   rack-contrib (~> 2.3)
-  rack-cors (~> 1.1)
+  rack-cors
   rack-test (~> 1.1)
   rake (~> 13.0)
   require_all (~> 3.0)
